@@ -1,20 +1,21 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import express from "express";
+import { PORT } from "./config/env.js";
+import userRouter from "./routes/user.routes.js";
+import subscriptionRouter from "./routes/subscription.routes.js";
+import authRouter from "./routes/auth.routes.js";
+import connectToDatabase from "./database/mongodb.js";
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const app = express();
 
-var app = express();
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/subscriptions', subscriptionRouter);
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.get('/',(req, res) => {res.send('welcome to api resposnse for subscription management')});
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.listen(PORT,async() => {
+    console.log(`Server is running on port http://localhost:${PORT}`)
+    await connectToDatabase();
+});
 
-module.exports = app;
+export default app
