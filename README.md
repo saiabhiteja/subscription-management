@@ -3,63 +3,66 @@
 SubDub is a comprehensive subscription management system that helps users track, manage, and receive timely reminders for their recurring subscriptions, preventing unwanted charges and optimizing spending.
 
 ## Content Structer
+```
 subdub/
-├── app.js                     # Entry point for the application
-├── package.json               # Project metadata and dependencies
-├── README.md                  # Project documentation
-├── .env.development.local     # Development environment variables
-├── .env.production.local      # Production environment variables
-├── .gitignore                 # Git ignore file
-├── eslint.config.js           # ESLint configuration
+├── 📄 app.js                          # Application entry point
+├── 📦 package.json                    # NPM package configuration
+├── 📦 package-lock.json               # NPM dependency lock file
+├── 📝 README.md                       # Project documentation
+├── 🔒 .env.development.local          # Development environment variables
+├── 🔒 .env.production.local           # Production environment variables
+├── 🙈 .gitignore                      # Git ignore file
+├── 🧹 eslint.config.js                # ESLint configuration
 │
-├── config/                    # Configuration files
-│   ├── arcjet.js              # Arcjet bot protection config
-│   ├── constants.js           # Application constants
-│   ├── env.js                 # Environment variables
-│   ├── nodemailer.js          # Email configuration
-│   └── upstash.js             # Upstash workflow configuration
+├── ⚙️ config/                         # Configuration files
+│   ├── 🛡️ arcjet.js                   # Arcjet bot protection config
+│   ├── 📊 constants.js                # Application constants
+│   ├── 🔑 env.js                      # Environment variables
+│   ├── 📧 nodemailer.js               # Email configuration
+│   └── 🔄 upstash.js                  # Upstash workflow configuration
 │
-├── controllers/               # Request handlers
-│   ├── auth.controller.js     # Authentication logic
-│   ├── dashboard.controller.js # Dashboard data
-│   ├── subscriptions.controller.js # Subscription management
-│   ├── user.controller.js     # User management
-│   └── workflow.controller.js # Workflow triggers
+├── 🎮 controllers/                    # Request handlers
+│   ├── 🔐 auth.controller.js          # Authentication logic
+│   ├── 📈 dashboard.controller.js     # Dashboard data
+│   ├── 💳 subscriptions.controller.js # Subscription management
+│   ├── 👤 user.controller.js          # User management
+│   └── ⏱️ workflow.controller.js      # Workflow triggers
 │
-├── database/                  # Database connection
-│   └── mongodb.js             # MongoDB connection setup
+├── 💾 database/                       # Database connection
+│   └── 🍃 mongodb.js                  # MongoDB connection setup
 │
-├── middlewares/               # Express middlewares
-│   ├── arcjet.middleware.js   # Bot protection
-│   ├── auth.middleware.js     # Authentication and authorization
-│   ├── error.middleware.js    # Global error handling
-│   └── validation.middleware.js # Request validation
+├── 🔌 middlewares/                    # Express middlewares
+│   ├── 🛡️ arcjet.middleware.js        # Bot protection
+│   ├── 🔐 auth.middleware.js          # Authentication and authorization
+│   ├── ❌ error.middleware.js         # Global error handling
+│   └── ✅ validation.middleware.js    # Request validation
 │
-├── models/                    # Database models
-│   ├── subscription.model.js  # Subscription schema
-│   └── user.model.js          # User schema
+├── 📊 models/                         # Database models
+│   ├── 💳 subscription.model.js       # Subscription schema
+│   └── 👤 user.model.js               # User schema
 │
-├── routes/                    # API routes
-│   ├── auth.routes.js         # Authentication routes
-│   ├── dashboard.routes.js    # Dashboard routes
-│   ├── subscriptions.routes.js # Subscription routes
-│   ├── user.routes.js         # User routes
-│   └── workflow.routes.js     # Workflow routes
+├── 🛣️ routes/                         # API routes
+│   ├── 🔐 auth.routes.js              # Authentication routes
+│   ├── 📈 dashboard.routes.js         # Dashboard routes
+│   ├── 💳 subscriptions.routes.js     # Subscription routes
+│   ├── 👤 user.routes.js              # User routes
+│   └── ⏱️ workflow.routes.js          # Workflow routes
 │
-├── utils/                     # Utility functions
-│   ├── date.utils.js          # Date manipulation helpers
-│   ├── email-template.js      # Email templates
-│   ├── logger.js              # Logging configuration
-│   └── send-email.js          # Email sending functions
+├── 🛠️ utils/                          # Utility functions
+│   ├── 📅 date.utils.js               # Date manipulation helpers
+│   ├── 📧 email-template.js           # Email templates
+│   ├── 📝 logger.js                   # Logging configuration
+│   └── 📨 send-email.js               # Email sending functions
 │
-├── validators/                # Input validation
-│   ├── auth.validator.js      # Authentication validation
-│   ├── subscriptions.validator.js # Subscription validation
-│   └── user.validator.js      # User validation
+├── ✅ validators/                     # Input validation
+│   ├── 🔐 auth.validator.js           # Authentication validation
+│   ├── 💳 subscriptions.validator.js  # Subscription validation
+│   └── 👤 user.validator.js           # User validation
 │
-└── logs/                      # Application logs
-    ├── combined.log           # Combined logs
-    └── error.log              # Error logs
+└── 📊 logs/                           # Application logs
+    ├── 📝 combined.log                # Combined logs
+    └── ❌ error.log                   # Error logs
+```
 
 ## Table of Contents
 
