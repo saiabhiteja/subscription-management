@@ -29,6 +29,20 @@ userRouter.get('/', authorize, restrictTo('admin'), getUsers);
 userRouter.get('/profile', authorize, getUserProfile);
 
 /**
+ * @route   PUT /api/v1/users/password
+ * @desc    Change password
+ * @access  Private
+ */
+userRouter.put('/password', 
+  [
+    authorize,
+    changePasswordValidator
+  ],
+  validateRequest,
+  changePassword
+);
+
+/**
  * @route   GET /api/v1/users/:id
  * @desc    Get user by ID
  * @access  Private
@@ -70,20 +84,6 @@ userRouter.delete('/:id',
   ],
   validateRequest,
   deleteUser
-);
-
-/**
- * @route   PUT /api/v1/users/password
- * @desc    Change password
- * @access  Private
- */
-userRouter.put('/password', 
-  [
-    authorize,
-    changePasswordValidator
-  ],
-  validateRequest,
-  changePassword
 );
 
 export default userRouter;

@@ -24,6 +24,27 @@ const subscriptionRouter = Router();
 subscriptionRouter.get('/', authorize, getSubscriptions);
 
 /**
+ * @route GET /api/v1/subscriptions/upcoming-renewals
+ * @desc Get upcoming renewals
+ * @access Private
+ */
+subscriptionRouter.get('/upcoming-renewals', authorize, getUpcomingRenewals);
+
+/**
+ * @route GET /api/v1/subscriptions/user/:id
+ * @desc Get user subscriptions
+ * @access Private
+ */
+subscriptionRouter.get('/user/:id', 
+  [
+    authorize, 
+    param('id').isMongoId().withMessage('Invalid user ID')
+  ],
+  validateRequest,
+  getUserSubscriptions
+);
+
+/**
  * @route GET /api/v1/subscriptions/:id
  * @desc Get subscription details by ID
  * @access Private
@@ -61,31 +82,6 @@ subscriptionRouter.put('/:id',
 );
 
 /**
- * @route DELETE /api/v1/subscriptions/:id
- * @desc Delete subscription
- * @access Private
- */
-subscriptionRouter.delete('/:id', 
-  [authorize, param('id').isMongoId().withMessage('Invalid subscription ID')],
-  validateRequest,
-  deleteSubscription
-);
-
-/**
- * @route GET /api/v1/subscriptions/user/:id
- * @desc Get user subscriptions
- * @access Private
- */
-subscriptionRouter.get('/user/:id', 
-  [
-    authorize, 
-    param('id').isMongoId().withMessage('Invalid user ID')
-  ],
-  validateRequest,
-  getUserSubscriptions
-);
-
-/**
  * @route PUT /api/v1/subscriptions/:id/cancel
  * @desc Cancel subscription
  * @access Private
@@ -100,10 +96,14 @@ subscriptionRouter.put('/:id/cancel',
 );
 
 /**
- * @route GET /api/v1/subscriptions/upcoming-renewals
- * @desc Get upcoming renewals
+ * @route DELETE /api/v1/subscriptions/:id
+ * @desc Delete subscription
  * @access Private
  */
-subscriptionRouter.get('/upcoming-renewals', authorize, getUpcomingRenewals);
+subscriptionRouter.delete('/:id', 
+  [authorize, param('id').isMongoId().withMessage('Invalid subscription ID')],
+  validateRequest,
+  deleteSubscription
+);
 
 export default subscriptionRouter;

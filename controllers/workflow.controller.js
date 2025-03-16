@@ -14,7 +14,7 @@ import { REMINDER_DAYS } from '../config/constants.js';
  */
 export const sendReminders = serve(async (context) => {
   try {
-    const { subscriptionId } = context.requestPayload;
+    const { subscriptionId } = await context.requestPayload;
     
     if (!subscriptionId) {
       logger.error('No subscription ID provided to workflow');
