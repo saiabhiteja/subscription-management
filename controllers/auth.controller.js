@@ -82,4 +82,17 @@ export const signIn = async (req, res, next) => {
   }
 }
 
-export const signOut = async (req, res, next) => {}
+export const signOut = async (req, res, next) => {
+  try {
+    // Since JWT tokens are stateless, we cannot invalidate them server-side
+    // The client should remove the token from storage
+    // We can only confirm the action
+    
+    res.status(200).json({
+      success: true,
+      message: 'User signed out successfully'
+    });
+  } catch (error) {
+    next(error);
+  }
+}

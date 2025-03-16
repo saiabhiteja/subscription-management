@@ -9,7 +9,11 @@ const aj = arcjet({
     detectBot({
       mode: "LIVE",
       allow: [ "CATEGORY:SEARCH_ENGINE" ],
-    }),
+    },{ 
+    mode: "TEST",
+    allow: [ "CATEGORY:SEARCH_ENGINE","CATEGORY:API_CLIENT", "USER_AGENT:Postman" ],
+    }
+  ),
     tokenBucket({
       mode: "LIVE",
       refillRate: 5, // Refill 5 tokens per interval
