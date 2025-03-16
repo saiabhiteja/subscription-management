@@ -87,7 +87,7 @@ export const getUsers = async (req, res, next) => {
 export const getUserProfile = async (req, res, next) => {
   try {
     // Find user and populate subscription count
-    const user = await User.findById(req.user.id).select('-password');
+    const user = await User.findById(req.user.id);
 
     if (!user) {
       const error = new Error('User not found');
@@ -97,7 +97,7 @@ export const getUserProfile = async (req, res, next) => {
 
     // Get subscription statistics
     const subscriptionStats = await Subscription.aggregate([
-      { $match: { user: mongoose.Types.ObjectId(req.user.id) } },
+      { $match: { user: new mongoose.Types.ObjectId(req.user.id) } },
       {
         $group: {
           _id: '$status',

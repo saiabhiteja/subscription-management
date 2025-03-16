@@ -1,4 +1,3 @@
-// validators/subscription.validator.js
 import { body } from 'express-validator';
 
 export const createSubscriptionValidator = [

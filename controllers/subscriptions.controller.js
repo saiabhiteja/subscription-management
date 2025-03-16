@@ -211,7 +211,7 @@ export const getUpcomingRenewals = async (req, res, next) => {
   try {
     const nextWeek = new Date();
     nextWeek.setDate(nextWeek.getDate() + 7);
-
+    logger.info("I am here")
     const subscriptions = await Subscription.find({
       user: req.user.id,
       status: 'active',

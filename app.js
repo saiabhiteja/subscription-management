@@ -1,7 +1,7 @@
 import express from "express";
 import { PORT } from "./config/env.js";
 import userRouter from "./routes/user.routes.js";
-import subscriptionRouter from "./routes/subscription.routes.js";
+import subscriptionRouter from "./routes/subscriptions.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import dashboardRouter from "./routes/dashboard.routes.js";
 import workflowRouter from "./routes/workflow.routes.js";

@@ -7,9 +7,10 @@ import {
   updateSubscription,
   deleteSubscription,
   cancelSubscription,
-  getUpcomingRenewals
-} from '../controllers/subscription.controller.js';
-import { createSubscriptionValidator, updateSubscriptionValidator } from '../validators/subscription.validator.js';
+  getUpcomingRenewals,
+  getSubscriptions
+} from '../controllers/subscriptions.controller.js';
+import { createSubscriptionValidator, updateSubscriptionValidator } from '../validators/subscriptions.validator.js';
 import validateRequest from '../middlewares/validation.middleware.js';
 import { param } from 'express-validator';
 
@@ -105,9 +106,4 @@ subscriptionRouter.put('/:id/cancel',
  */
 subscriptionRouter.get('/upcoming-renewals', authorize, getUpcomingRenewals);
 
-// Stub functions (to be implemented)
-function getSubscriptions(req, res, next) {
-  // Implementation needed
-  res.send({ title: 'GET all subscriptions' });
-}
 export default subscriptionRouter;

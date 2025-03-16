@@ -85,7 +85,7 @@ export const signIn = async (req, res, next) => {
     const { email, password } = req.body;
 
     // Find user by email
-    const user = await User.findOne({ email }).select('+password');
+    const user = await User.findOne({ email });
 
     if (!user) {
       const error = new Error('Invalid credentials');
@@ -94,8 +94,7 @@ export const signIn = async (req, res, next) => {
     }
 
     // Check if password matches
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-
+    const isPasswordValid = await user.matchPassword(password);
     if (!isPasswordValid) {
       const error = new Error('Invalid credentials');
       error.statusCode = 401;

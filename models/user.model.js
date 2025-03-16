@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'User Password is required'],
     minLength: 6,
-    select: false, // Don't return password by default
+    // select: false, // Don't return password by default
   },
   role: {
     type: String,
@@ -55,15 +55,6 @@ userSchema.methods.matchPassword = async function(enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Encrypt password using bcrypt
-userSchema.pre('save', async function(next) {
-  if (!this.isModified('password')) {
-    next();
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
 
 // Update lastLogin timestamp
 userSchema.methods.updateLoginTimestamp = async function() {
