@@ -362,27 +362,6 @@ SubDub uses a comprehensive email notification system:
 4. **Password Reset**: Secure password reset workflow
 5. **Responsive Design**: Mobile-friendly email templates
 
-<!-- Example of reminder email template:
-
-```html
-<div style="font-family: 'Segoe UI'...">
-  <table>
-    <tr>
-      <td style="background-color: #4a90e2;">
-        <p>SubDub</p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <p>Hello User,</p>
-        <p>Your Netflix subscription is set to renew on Mar 21, 2025 (5 days from today).</p>
-        <!-- Subscription details -->
-      </td>
-    </tr>
-  </table>
-</div>
-``` -->
-
 <!-- ## Deployment
 
 ### Deployment Options
