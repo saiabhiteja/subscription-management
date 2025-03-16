@@ -1,17 +1,89 @@
 import { Router } from "express";
-import { getUser, getUsers } from "../controllers/user.controller.js";
-import authorize from "../middlewares/auth.middleware.js";
+import { 
+  getUsers, 
+  getUser, 
+  updateUser, 
+  deleteUser,
+  changePassword,
+  getUserProfile
+} from "../controllers/user.controller.js";
+import { authorize, restrictTo } from "../middlewares/auth.middleware.js";
+import { param } from 'express-validator';
+import validateRequest from "../middlewares/validation.middleware.js";
+import { updateUserValidator, changePasswordValidator } from "../validators/user.validator.js";
 
 const userRouter = Router();
 
-userRouter.get('/',getUsers);
+/**
+ * @route   GET /api/v1/users
+ * @desc    Get all users
+ * @access  Private/Admin
+ */
+userRouter.get('/', authorize, restrictTo('admin'), getUsers);
 
-userRouter.get('/:id',authorize,getUser);
+/**
+ * @route   GET /api/v1/users/profile
+ * @desc    Get current user's profile
+ * @access  Private
+ */
+userRouter.get('/profile', authorize, getUserProfile);
 
-userRouter.post('/',(req,res)=> res.send({title : "Create a new user"}));
+/**
+ * @route   GET /api/v1/users/:id
+ * @desc    Get user by ID
+ * @access  Private
+ */
+userRouter.get('/:id', 
+  [
+    authorize, 
+    param('id').isMongoId().withMessage('Invalid user ID')
+  ],
+  validateRequest,
+  getUser
+);
 
-userRouter.put('/:id',(req,res)=> res.send({title : "Update user"}));
+/**
+ * @route   PUT /api/v1/users/:id
+ * @desc    Update user
+ * @access  Private
+ */
+userRouter.put('/:id', 
+  [
+    authorize, 
+    param('id').isMongoId().withMessage('Invalid user ID'),
+    updateUserValidator
+  ],
+  validateRequest,
+  updateUser
+);
 
-userRouter.delete('/:id',(req,res)=> res.send({title : "delete a user"}));
+/**
+ * @route   DELETE /api/v1/users/:id
+ * @desc    Delete user
+ * @access  Private/Admin
+ */
+userRouter.delete('/:id', 
+  [
+    authorize, 
+    restrictTo('admin'),
+    param('id').isMongoId().withMessage('Invalid user ID')
+  ],
+  validateRequest,
+  deleteUser
+);
+
+/**
+ * @route   PUT /api/v1/users/password
+ * @desc    Change password
+ * @access  Private
+ */
+userRouter.put('/password', 
+  [
+    authorize,
+    changePasswordValidator
+  ],
+  validateRequest,
+  changePassword
+);
 
 export default userRouter;

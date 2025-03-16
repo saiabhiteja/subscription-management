@@ -1,26 +1,113 @@
 import { Router } from 'express';
-import authorize from '../middlewares/auth.middleware.js'
+import authorize from '../middlewares/auth.middleware.js';
 import {
   createSubscription,
   getUserSubscriptions,
-} from '../controllers/subscription.controller.js'
+  getSubscriptionById,
+  updateSubscription,
+  deleteSubscription,
+  cancelSubscription,
+  getUpcomingRenewals
+} from '../controllers/subscription.controller.js';
+import { createSubscriptionValidator, updateSubscriptionValidator } from '../validators/subscription.validator.js';
+import validateRequest from '../middlewares/validation.middleware.js';
+import { param } from 'express-validator';
 
 const subscriptionRouter = Router();
 
-subscriptionRouter.get('/', (req, res) => res.send({ title: 'GET all subscriptions' }));
+/**
+ * @route GET /api/v1/subscriptions
+ * @desc Get all subscriptions (admin only)
+ * @access Private/Admin
+ */
+subscriptionRouter.get('/', authorize, getSubscriptions);
 
-subscriptionRouter.get('/:id', (req, res) => res.send({ title: 'GET subscription details' }));
+/**
+ * @route GET /api/v1/subscriptions/:id
+ * @desc Get subscription details by ID
+ * @access Private
+ */
+subscriptionRouter.get('/:id', 
+  [authorize, param('id').isMongoId().withMessage('Invalid subscription ID')],
+  validateRequest,
+  getSubscriptionById
+);
 
-subscriptionRouter.post('/', authorize, createSubscription);
+/**
+ * @route POST /api/v1/subscriptions
+ * @desc Create a new subscription
+ * @access Private
+ */
+subscriptionRouter.post('/', 
+  [authorize, createSubscriptionValidator],
+  validateRequest,
+  createSubscription
+);
 
-subscriptionRouter.put('/:id', (req, res) => res.send({ title: 'UPDATE subscription' }));
+/**
+ * @route PUT /api/v1/subscriptions/:id
+ * @desc Update subscription
+ * @access Private
+ */
+subscriptionRouter.put('/:id', 
+  [
+    authorize, 
+    param('id').isMongoId().withMessage('Invalid subscription ID'),
+    updateSubscriptionValidator
+  ],
+  validateRequest,
+  updateSubscription
+);
 
-subscriptionRouter.delete('/:id', (req, res) => res.send({ title: 'DELETE subscription' }));
+/**
+ * @route DELETE /api/v1/subscriptions/:id
+ * @desc Delete subscription
+ * @access Private
+ */
+subscriptionRouter.delete('/:id', 
+  [authorize, param('id').isMongoId().withMessage('Invalid subscription ID')],
+  validateRequest,
+  deleteSubscription
+);
 
-subscriptionRouter.get('/user/:id', authorize, getUserSubscriptions);
+/**
+ * @route GET /api/v1/subscriptions/user/:id
+ * @desc Get user subscriptions
+ * @access Private
+ */
+subscriptionRouter.get('/user/:id', 
+  [
+    authorize, 
+    param('id').isMongoId().withMessage('Invalid user ID')
+  ],
+  validateRequest,
+  getUserSubscriptions
+);
 
-subscriptionRouter.put('/:id/cancel', (req, res) => res.send({ title: 'CANCEL subscription' }));
+/**
+ * @route PUT /api/v1/subscriptions/:id/cancel
+ * @desc Cancel subscription
+ * @access Private
+ */
+subscriptionRouter.put('/:id/cancel', 
+  [
+    authorize, 
+    param('id').isMongoId().withMessage('Invalid subscription ID')
+  ],
+  validateRequest,
+  cancelSubscription
+);
 
-subscriptionRouter.get('/upcoming-renewals', (req, res) => res.send({ title: 'GET upcoming renewals' }));
+/**
+ * @route GET /api/v1/subscriptions/upcoming-renewals
+ * @desc Get upcoming renewals
+ * @access Private
+ */
+subscriptionRouter.get('/upcoming-renewals', authorize, getUpcomingRenewals);
 
+// Stub functions (to be implemented)
+function getSubscriptions(req, res, next) {
+  // Implementation needed
+  res.send({ title: 'GET all subscriptions' });
+}
 export default subscriptionRouter;
