@@ -202,8 +202,8 @@ subdub/
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/subdub.git
-   cd subdub
+   https://github.com/saiabhiteja/subscription-management
+   cd subscription-management
    ```
 
 2. Install dependencies:
@@ -362,7 +362,7 @@ SubDub uses a comprehensive email notification system:
 4. **Password Reset**: Secure password reset workflow
 5. **Responsive Design**: Mobile-friendly email templates
 
-Example of reminder email template:
+<!-- Example of reminder email template:
 
 ```html
 <div style="font-family: 'Segoe UI'...">
@@ -381,7 +381,7 @@ Example of reminder email template:
     </tr>
   </table>
 </div>
-```
+``` -->
 
 <!-- ## Deployment
 
@@ -428,9 +428,9 @@ Example of reminder email template:
 - Write comprehensive tests for new features
 - Update documentation for API changes -->
 
-## License
+<!-- ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the LICENSE file for details. -->
 
 ## Acknowledgments
 
